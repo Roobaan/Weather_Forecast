@@ -26,7 +26,7 @@ class ForecastViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setInitialUI()
+        potriatUI()
         
         weatherViewModel.fetchForecast(city: "Chennai") { error in
             guard error == nil else{
@@ -69,7 +69,7 @@ class ForecastViewController: UIViewController {
                 self.landscapeUI()
             }
             else {
-                self.setInitialUI()
+                self.potriatUI()
             }
         }, completion: nil)
     }
@@ -107,8 +107,8 @@ class ForecastViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    //MARK: - Initial view
-    func setInitialUI(){
+    //MARK: - Initial potrait view
+    func potriatUI(){
         // currentWeather initialization
         currentWeather.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height * 0.4)
         currentWeather.contentMode = .scaleAspectFill
@@ -147,6 +147,7 @@ class ForecastViewController: UIViewController {
     
 }
 
+//MARK: - Table view extension to dispaly the weather conditon for 3 days
 extension ForecastViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return weatherViewModel.weatherResponse?.forecast?.forecastday?.count ?? 0
